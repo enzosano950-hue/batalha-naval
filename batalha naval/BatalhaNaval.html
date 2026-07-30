@@ -1,0 +1,77 @@
+
+
+      <!DOCTYPE html>
+      <html lang="pt-BR">
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Batalha Naval</title>
+        <style>
+          body{font-family:Arial;
+            padding:8px
+        }
+          #board{display:grid;
+            grid-template-columns:repeat(10,40px);
+            gap:4px;
+            max-width:420px;
+        }
+          .casa{width:40px;
+            height:40px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            border:1px solid #ccc;
+            }
+        </style>
+        <script>
+          document.addEventListener('DOMContentLoaded', ()=>{
+           
+            const mat = [];
+            for(let i=0;i<10;i++) mat.push('barco1');
+            for(let i=0;i<10;i++) mat.push('barco2');
+            for(let i=0;i<10;i++) mat.push('barco3');
+            for(let i=0;i<35;i++) mat.push('bomba');
+            for(let i=0;i<35;i++) mat.push('agua');
+
+            
+           
+            const IMGS = {
+              fire: 'fire-icon.png',
+              barco1: 'ship-1.png',
+              barco2: 'ship-2.png',
+              barco3: 'ship-3.png',
+              bomba: 'bomba.png',
+              agua: 'wave.png'
+            };
+
+            
+
+            const board = document.getElementById('board');
+          for(let i=0;i<100;i++){
+            const el = document.createElement('div');
+            el.className = 'casa';
+    
+            const img = document.createElement('img');
+            img.src = IMGS.fire;
+            img.width = 36; img.height = 36; img.alt = 'fire';
+            
+            el.appendChild(img);
+            el.addEventListener('click', function reveal(){
+              if(el.revelada) return;
+              const v = mat[i];
+              img.src = IMGS[v] || IMGS.agua;
+              img.alt = v;
+              el.revelada = true;
+            });
+            board.appendChild(el);
+          }
+
+          });
+        </script>
+      </head>
+      <body>
+            <p>Clique nos quadrados para mostrar.</p>
+            <div id="board"></div>
+          </body>
+      </html>
+        
